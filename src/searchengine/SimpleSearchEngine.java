@@ -73,5 +73,48 @@ public class SimpleSearchEngine {
         return results;
     }
     
+    
+    /**
+     * Compute a very simple relevance score:
+     *   - Count how many query terms appear in the document.
+     *   - If document matches any phrase exactly, add a small bonus.
+     *
+     * This is NOT real TF-IDF, just a simple scoring for practice.
+     */
+    private double computeScore(Document doc, String rawQuery) {
+        String lowerQuery = rawQuery.toLowerCase();
+
+        // Extract terms (ignore operators AND/OR/NOT, ignore quotes)
+        Set<String> terms = new HashSet<>();
+        String[] parts = lowerQuery.replace("\"", "").split("[^a-z0-9]+");
+        for (String p : parts) {
+            if (p.isEmpty()) {
+                continue;
+            }
+            if (p.equals("and") || p.equals("or") || p.equals("not")) {
+                continue;
+            }
+            terms.add(p);
+        }
+
+        double score = 0.0;
+
+        for (String term : terms) {
+            if (doc.containsTerm(term)) {
+                score += 1.0;
+            }
+        }
+
+        // Bonus if the document contains any phrase from the query
+        List<String> phrases = extractPhrases(rawQuery);
+        for (String phrase : phrases) {
+            if (doc.containsPhrase(phrase.toLowerCase())) {
+                score += 2.0; // phrase match bonus
+            }
+        }
+
+        return score;
+    }
+
 
 }
