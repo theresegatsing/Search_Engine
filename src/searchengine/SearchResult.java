@@ -39,6 +39,11 @@ public class SearchResult implements Comparable<SearchResult> {
 	        // Higher score should come first
 	        return Double.compare(other.score, this.score);
 	    }
+	    
+	    @Override
+	    public String toString() {
+	        return "SearchResult{doc=" + document + ", score=" + score + "}";
+	    }
 
 
 }
