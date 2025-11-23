@@ -171,5 +171,9 @@ public class SimpleSearchEngine {
         // fallback
         return rawQuery.toLowerCase().trim();
     }
+    
+    public List<Document> getDocuments() {
+        return Collections.unmodifiableList(documents);
+    }
 
 }
