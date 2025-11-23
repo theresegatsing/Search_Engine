@@ -90,5 +90,56 @@ public class BooleanQueryProcessor {
         return result;
     }
 
+    
+    /**
+     * Tokenize a query string, keeping phrases in quotes as a single token.
+     * Example:
+     *   raw:  java AND "search engine" NOT python
+     *   tokens: [java, AND, search engine, NOT, python]
+     */
+    private static List<String> tokenizeQuery(String rawQuery) {
+        List<String> tokens = new ArrayList<>();
+
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < rawQuery.length(); i++) {
+            char c = rawQuery.charAt(i);
+
+            if (c == '"') {
+                // Toggle quote mode
+                inQuotes = !inQuotes;
+                if (!inQuotes) {
+                    // Just finished a phrase
+                    if (current.length() > 0) {
+                        tokens.add(current.toString());
+                        current.setLength(0);
+                    }
+                }
+                continue;
+            }
+
+            if (inQuotes) {
+                // Inside quotes, keep everything (including spaces)
+                current.append(c);
+            } else {
+                // Outside quotes, split on spaces
+                if (Character.isWhitespace(c)) {
+                    if (current.length() > 0) {
+                        tokens.add(current.toString());
+                        current.setLength(0);
+                    }
+                } else {
+                    current.append(c);
+                }
+            }
+        }
+
+        if (current.length() > 0) {
+            tokens.add(current.toString());
+        }
+
+        return tokens;
+    }
 
 }
