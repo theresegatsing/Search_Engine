@@ -72,7 +72,7 @@ Package: `searchengine`
 
 ---
 
-## Setup (Eclipse)
+## Setup 
 
 1. Create a new **Java Project**: `SimpleSearchEngine`.
 2. Create package: `searchengine`.
