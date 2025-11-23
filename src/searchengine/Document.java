@@ -50,4 +50,14 @@ public class Document {
 	        return contentLower;
 	    }
 
+	    
+	    /**
+	     * Returns true if this document contains the given term (already lowercase).
+	     * This is a very simple check: it does substring search, not full word-boundary matching.
+	     */
+	    public boolean containsTerm(String termLower) {
+	        return contentLower.contains(termLower);
+	    }
+	    
+	    
 }
