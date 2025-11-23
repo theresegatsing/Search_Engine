@@ -11,5 +11,9 @@ import java.util.*;
  */
 
 public class InvertedIndex {
+	
+	// term (lowercase) -> set of documents that contain that term
+    private final Map<String, Set<Document>> index = new HashMap<>();
+
 
 }
