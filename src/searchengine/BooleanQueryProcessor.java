@@ -141,5 +141,32 @@ public class BooleanQueryProcessor {
 
         return tokens;
     }
+    
+    
+    /**
+     * Get all documents that match a single token.
+     * If the token contains spaces, we treat it as a phrase.
+     * Otherwise, we treat it as a single term and use the inverted index.
+     */
+    private static Set<Document> getDocsForToken(String token,
+                                                 List<Document> allDocs,
+                                                 InvertedIndex index) {
+        Set<Document> result = new HashSet<>();
+
+        if (token.contains(" ")) {
+            // Phrase search: scan all documents and check if they contain the phrase
+            String phraseLower = token.toLowerCase();
+            for (Document doc : allDocs) {
+                if (doc.containsPhrase(phraseLower)) {
+                    result.add(doc);
+                }
+            }
+        } else {
+            // Single term: use inverted index
+            result.addAll(index.getDocumentsForTerm(token));
+        }
+
+        return result;
+    }
 
 }
