@@ -98,5 +98,10 @@ public class Document {
 	        return snippet;
 	    }
 
+	    
+	    @Override
+	    public String toString() {
+	        return "Document{id=" + id + ", title='" + title + "', date=" + date + "}";
+	    }
 	        
 }
