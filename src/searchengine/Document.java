@@ -20,5 +20,14 @@ public class Document {
 
 	 // Cached lowercase content for easier case-insensitive matching
 	 private final String contentLower;
+	 
+	 
+	 public Document(int id, String title, String content, LocalDate date) {
+	        this.id = id;
+	        this.title = title;
+	        this.content = content;
+	        this.date = date;
+	        this.contentLower = content.toLowerCase();
+	 }
 
 }
