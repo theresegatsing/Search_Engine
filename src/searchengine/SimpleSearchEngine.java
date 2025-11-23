@@ -145,4 +145,31 @@ public class SimpleSearchEngine {
         return phrases;
     }
 
+    
+    /**
+     * Extract something decent to use as the snippet search term:
+     *   - If there's a phrase, use the first phrase
+     *   - Else, use the first non-operator term
+     */
+    private String extractSnippetQueryTerm(String rawQuery) {
+        List<String> phrases = extractPhrases(rawQuery);
+        if (!phrases.isEmpty()) {
+            return phrases.get(0).toLowerCase();
+        }
+
+        String[] parts = rawQuery.toLowerCase().replace("\"", "").split("[^a-z0-9]+");
+        for (String p : parts) {
+            if (p.isEmpty()) {
+                continue;
+            }
+            if (p.equals("and") || p.equals("or") || p.equals("not")) {
+                continue;
+            }
+            return p;
+        }
+
+        // fallback
+        return rawQuery.toLowerCase().trim();
+    }
+
 }
