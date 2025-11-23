@@ -12,5 +12,13 @@ import java.time.LocalDate;
  */
 
 public class Document {
+	
+	 private final int id;
+	 private final String title;
+	 private final String content;
+	 private final LocalDate date;
+
+	 // Cached lowercase content for easier case-insensitive matching
+	 private final String contentLower;
 
 }
