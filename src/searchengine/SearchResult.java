@@ -21,5 +21,18 @@ public class SearchResult implements Comparable<SearchResult> {
 	        this.score = score;
 	        this.snippet = snippet;
 	    }
+	    
+	    public Document getDocument() {
+	        return document;
+	    }
+
+	    public double getScore() {
+	        return score;
+	    }
+
+	    public String getSnippet() {
+	        return snippet;
+	    }
+
 
 }
