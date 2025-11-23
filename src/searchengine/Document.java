@@ -30,4 +30,24 @@ public class Document {
 	        this.contentLower = content.toLowerCase();
 	 }
 
+	    public int getId() {
+	        return id;
+	    }
+
+	    public String getTitle() {
+	        return title;
+	    }
+
+	    public String getContent() {
+	        return content;
+	    }
+
+	    public LocalDate getDate() {
+	        return date;
+	    }
+
+	    public String getContentLower() {
+	        return contentLower;
+	    }
+
 }
