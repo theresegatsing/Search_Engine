@@ -11,5 +11,15 @@ package searchengine;
  */
 
 public class SearchResult implements Comparable<SearchResult> {
+	
+	  	private final Document document;
+	    private final double score;
+	    private final String snippet;
+
+	    public SearchResult(Document document, double score, String snippet) {
+	        this.document = document;
+	        this.score = score;
+	        this.snippet = snippet;
+	    }
 
 }
