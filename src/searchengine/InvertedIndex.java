@@ -33,6 +33,21 @@ public class InvertedIndex {
             index.computeIfAbsent(token, k -> new HashSet<>()).add(doc);
         }
     }
+    
+    
+    /**
+     * Get all documents that contain the given term (case-insensitive).
+     */
+    public Set<Document> getDocumentsForTerm(String term) {
+        String key = term.toLowerCase();
+        Set<Document> docs = index.get(key);
+        if (docs == null) {
+            return Collections.emptySet();
+        }
+        // Return a copy so the caller can modify it without affecting the index
+        return new HashSet<>(docs);
+    }
+
 
 
 }
