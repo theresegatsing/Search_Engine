@@ -33,6 +33,12 @@ public class SearchResult implements Comparable<SearchResult> {
 	    public String getSnippet() {
 	        return snippet;
 	    }
+	    
+	    @Override
+	    public int compareTo(SearchResult other) {
+	        // Higher score should come first
+	        return Double.compare(other.score, this.score);
+	    }
 
 
 }
